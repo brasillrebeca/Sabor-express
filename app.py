@@ -1,5 +1,6 @@
 import os
 
+# lista que armazena dicionários com os dados referentes aos restaurantes cadastrados no sistema
 restaurantes = [{'nome':'Praça', 'categoria':'Japonesa', 'ativo':False}, 
                 {'nome':'Pizza Suprema', 'categoria':'Pizza', 'ativo':True},
                 {'nome':'Cantina', 'categoria':'Italiano', 'ativo':False}]
@@ -17,9 +18,9 @@ def exibir_opcoes():
     print('4.Sair\n')
 
 def finalizar_app():
-      exibir_subtitulo('Finalizar app')
+    exibir_subtitulo('Finalizar app')
 
-
+# função que retoma o menu de opções
 def voltar_ao_menu_principal():
     input('\nDigite uma tecla para voltar ao menu principal ')
     main()
@@ -29,6 +30,7 @@ def opcao_invalida():
     print('Opção inválida!\n')
     voltar_ao_menu_principal()
 
+# função criada para evitar repetições dos elementos nela contidos ao longo do código
 def exibir_subtitulo(texto):
     os.system('cls')
     linha = '*' * (len(texto))
@@ -38,6 +40,13 @@ def exibir_subtitulo(texto):
     print()
 
 # função para cadastrar restaurantes
+'''
+1) Recebe os inputs:
+- Nome do restaurante
+- Categoria
+2) Armazena os dados fornecidos em um dicionário
+3) Envia o dicionário para a lista restaurantes
+'''
 def cadastrar_novo_restaurante():
     exibir_subtitulo('Cadastro de novos restaurantes')
 
@@ -49,6 +58,7 @@ def cadastrar_novo_restaurante():
     print(f'O restaurante {nome_do_restaurante} foi cadastrado com sucesso!')
     voltar_ao_menu_principal()
 
+# função com loop de repetição para printar na tela os dados fornecidos, à medida que vão sendo adicionados
 def listar_restaurantes():
     exibir_subtitulo('Listando restaurantes')
     #                           ajuste de espaço
@@ -58,16 +68,17 @@ def listar_restaurantes():
         categoria = restaurante['categoria']
         ativo = 'ativado' if restaurante['ativo'] else 'desativado'
         print(f'- {nome_restaurante.ljust(20)} | {categoria.ljust(20)} | {ativo}')
-
     voltar_ao_menu_principal()
+
 
 def alternar_estado_restaurante():
     exibir_subtitulo('ALterando estado do restaurante')
     nome_restaurante = input('Digite o nome do restaurante que deseja alterar o estado: ')
+
+    # inicializando a variável booleana
     restaurante_encontrado = False
-
-
     for restaurante in restaurantes:
+          # condição que verifica um elemento específico pertencente à lista
           if nome_restaurante == restaurante['nome']:
             restaurante_encontrado = True
             restaurante['ativo'] = not restaurante['ativo']
